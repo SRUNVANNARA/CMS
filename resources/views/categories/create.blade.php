@@ -25,7 +25,8 @@
             <label for="name">Name</label>
             <input type="text" class="form-control" id="name" name="name" value="{{isset($category) ? $category->name : ''}}">
             </div>
-            <button type="submit" class="btn btn-primary">{{isset($category) ? 'Update' : 'Add Category'}}</button>
+            <button type="submit" class="btn btn-primary btn-sm">{{isset($category) ? 'Update' : 'Add Category'}}</button>
+            <a href="{{route('categories.index')}}" class="btn btn-warning btn-sm">Cancel</a>
     </div>
   </div>
 @endsection
