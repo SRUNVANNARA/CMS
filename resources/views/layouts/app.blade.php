@@ -55,7 +55,10 @@
                             <a class="nav-link" href="{{route('categories.index')}}">Category</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="">Post</a>
+                            <a class="nav-link" href="{{route('posts.index')}}">Post</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{route('posts.index')}}">Trashed Posts</a>
                         </li>
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
@@ -92,7 +95,7 @@
 
             <div class="row justify-content-center">
 
-                <div class="col-sm-8">@yield('content')</div>
+                <div class="col-sm-12">@yield('content')</div>
             </div>
         @else
         @yield('content')
