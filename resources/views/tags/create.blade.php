@@ -16,20 +16,20 @@
 
 <div class="card">
     <div class="card-header">
-        {{isset($category) ? 'Edit Category':'Category'}}
+        {{isset($tag) ? 'Edit Category':'Category'}}
     </div>
     <div class="card-body">
-    <form action="{{isset($category) ? route('categories.update',$category->id) : route('categories.store')}}" method="POST">
+    <form action="{{isset($tag) ? route('tags.update',$tag->id) : route('tags.store')}}" method="POST">
         @csrf
-        @isset($category)
+        @isset($tag)
           @method('PUT')
         @endisset
             <div class="form-group">
             <label for="name">Name</label>
-            <input type="text" class="form-control" id="name" name="name" value="{{isset($category) ? $category->name : ''}}">
+            <input type="text" class="form-control" id="name" name="name" value="{{isset($tag) ? $tag->name : ''}}">
             </div>
-            <button type="submit" class="btn btn-primary btn-sm">{{isset($category) ? 'Update' : 'Add Category'}}</button>
-            <a href="{{route('categories.index')}}" class="btn btn-warning btn-sm">Cancel</a>
+            <button type="submit" class="btn btn-primary btn-sm">{{isset($tag) ? 'Update' : 'Add Tag'}}</button>
+            <a href="{{route('tags.index')}}" class="btn btn-warning btn-sm">Cancel</a>
     </div>
   </div>
 @endsection

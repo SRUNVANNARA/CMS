@@ -20,7 +20,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::resource('categories','CategoriesController');
+Route::resource('categories','CategoriesController')->middleware('auth');
 
-Route::resource('posts', 'PostsController');
-
+Route::resource('posts', 'PostsController')->middleware('auth');
+Route::resource('tags', 'TagsController');

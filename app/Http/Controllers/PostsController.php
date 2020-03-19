@@ -2,13 +2,22 @@
 
 namespace App\Http\Controllers;
 
+use App\Category;
+use App\Http\Middleware\VerifyCategoriesCount;
 use App\Http\Requests\Posts\CreatePostRequest;
+use App\Http\Requests\posts\UpdatePostRequest;
 use App\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
 class PostsController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('verifyCategoriesCount',['create','store']);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -26,7 +35,7 @@ class PostsController extends Controller
      */
     public function create()
     {
-        return view('posts.create');
+        return view('posts.create')->with('categories',Category::all());
     }
 
     /**
@@ -43,8 +52,9 @@ class PostsController extends Controller
             'title'=>$request->title,
             'description'=>$request->description,
             'content'=>$request->content,
-            'image'=>$image
-            //'publish_at'=>$request->publish_at
+            'image'=>$image,
+            'category_id'=>$request->category,
+            'publish_at'=>$request->publish_at
         ]);
         session()->flash('success', 'Post added successfully.');
         return redirect(route('posts.index'));
@@ -68,9 +78,9 @@ class PostsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Post $post)
     {
-        //
+        return view('posts.create')->with('post',$post)->with('categories',Category::all());
     }
 
     /**
@@ -80,9 +90,26 @@ class PostsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdatePostRequest $request,Post $post)
     {
-        //
+        $data=$request->all();
+        //check if new image
+        if($request->hasFile('image')){
+        //upload it
+        $image=$request->image->store('posts');
+        //delete old image
+        
+        Storage::delete($post->image);
+
+        $data['image']=$image;
+        
+        }
+        //update attributes
+        $post->update($data);
+        //flash message
+        session()->flash('success', 'Post updated successfully.');
+        //redirect user
+        return redirect(route('posts.index'));
     }
 
     /**

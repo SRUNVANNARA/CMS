@@ -19,6 +19,7 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+   @yield('css')
 </head>
 <body>
     <div id="app">
@@ -54,6 +55,11 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{{route('categories.index')}}">Category</a>
                         </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{route('tags.index')}}">Tag</a>
+                        </li>
+
                         <li class="nav-item">
                             <a class="nav-link" href="{{route('posts.index')}}">Post</a>
                         </li>
@@ -90,12 +96,14 @@
             @if (session()->has('success'))
             <li class="list-group-item list-group-item-success">{{session()->get('success')}}</li>
             @endif
+
+            
            </div>
             @auth
 
             <div class="row justify-content-center">
 
-                <div class="col-sm-12">@yield('content')</div>
+                <div class="col-sm-12 col-md-8">@yield('content')</div>
             </div>
         @else
         @yield('content')

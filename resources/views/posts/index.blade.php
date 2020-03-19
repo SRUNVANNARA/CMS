@@ -31,12 +31,12 @@
                     </td>
                     <td>{{$post->title}}</td>
                     <td>{{$post->description}}</td>
-                    <td><buttton class="btn btn-warning btn-sm">Edit</buttton></td>
+                    <td><a href="{{route('posts.edit',$post->id)}}" class="btn btn-warning btn-sm">Edit</a></td>
                     <td>
                       <form action="{{route('posts.destroy', $post->id)}}" method="POST">
                         @csrf
                         @method('DELETE')
-                        <button type="SUBMIT" class="btn btn-danger btn-sm">Trash</button>
+                        <button type="SUBMIT" class="btn btn-danger btn-sm">Delete</button>
                       </form>
                     </td>
                   </tr>
